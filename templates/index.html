@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    {% if current_user.is_authenticated %}
+        <h1>Welcome, {{ current_user.username }}!</h1>
+        <h3>Profile:</h3>
+        <p>Username: {{current_user.username}}</p>
+        <p>Email: {{current_user.email}}</p>
+        <p>Email Verified: {{current_user.emailv}}</p>
+        {% if current_user.emailv==False %}
+            <p>click <a href="{{ url_for('emailv',email=current_user.email) }}">here</a> to verify your email.</p>
+        {% endif %}
+    {% else %}
+        <h1>Welcome, Stranger!</h1>
+        <p>Please <a href="{{ url_for('register') }}">Register</a> or <a href="{{ url_for('login') }}">Login</a>.</p>
+    {% endif %}
+{% endblock %}
